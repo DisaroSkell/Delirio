@@ -1,5 +1,5 @@
 <items version="1" gfxroot="gfx/items/">
-    <active maxcharges="6" name="Delirio's Clicker" gfx="DelirioClicker.png" description="Curse of Delirium" quality="1" tags="offensive nocantrip"/>
+    <active maxcharges="6" name="Delirio's Curse" gfx="DelirioCruse.png" description="Use it or you'll die" quality="1" tags="offensive nocantrip"/>
 </items>
 
 <!--
