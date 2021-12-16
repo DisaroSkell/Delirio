@@ -98,61 +98,155 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LifeInit)
 
 
---For the store, when you get the character, if that's Laz Risen, put that variable isLazDead at True
+--Life storage here, remember to store if Laz has died
+function mod:storeLife()
+    local player = Isaac.GetPlayer(0).GetPlayerType()
+    if player == PlayerType.PLAYER_ISAAC then                   --Isaac
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_MAGDALENA then           --Magdalene
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_CAIN then                --Cain
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_JUDAS then               --Judas
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_XXX then                 --BlueBaby
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_EVE then                 --Eve
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_SAMSON then              --Samson
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_AZAZEL then              --Azazel
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif (player == PlayerType.PLAYER_LAZARUS) or (player == PlayerType.PLAYER_LAZARUS2) then    --Lazarus
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_EDEN then                --Eden
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_THELOST then             --The Lost
+        --Nothing to be done ?? Maybe holymantle check
+
+    elseif player == PlayerType.PLAYER_LILITH then              --Lilith
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+        
+    elseif player == PlayerType.PLAYER_KEEPER then              --Keeper
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_APOLLYON then            --Apollyon
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_THEFORGOTTEN then        --The Forgotten
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_THESOUL then             --The Soul
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_BETHANY then             --Bethany
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+    elseif player == PlayerType.PLAYER_JACOB then               --Jacob
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    elseif player == PlayerType.PLAYER_ESAU then                --Esau
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+    else                                                        --Delirio
+        --LifePickupCheck
+        --HurtCheck
+        --StoreLife
+
+mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.storeLife)
+--Maybe split in two with callback: one at dmg and one at heart pickup
+
+
 --Activates the item "Delirio's Curse" which makes the character change himself into another character
 function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
 	local num = rng:RandomInt(18)
 
     if num == 1 then        --Isaac
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_ISAAC)
         --LoadLife
         --Change Active Item form
 
     elseif num == 2 then    --Magdalene
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_MAGDALENA)
         --LoadLife
         --Change Active Item form
 
     elseif num == 3 then    --Cain
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_CAIN)
         --LoadLife
         --Change Active Item form
 
     elseif num == 4 then    --Judas
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_JUDAS)
         --LoadLife
         --Change Active Item form
 
     elseif num == 5 then    --BlueBaby
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_XXX)
         --LoadLife
         --Change Active Item form
 
     elseif num == 6 then    --Eve
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_EVE)
         --LoadLife
         --Change Active Item form
 
     elseif num == 7 then    --Samson
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_SAMSON)
         --LoadLife
         --Change Active Item form
 
     elseif num == 8 then    --Azazel
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_AZAZEL)
         --LoadLife
         --Change Active Item form
 
     elseif num == 9 then    --Lazarus
-        --StoreLife
         if isLazDead then   --Lazarus Risen
             player:ChangePlayerType(PlayerType.PLAYER_LAZARUS2)
             --LoadLife
@@ -164,56 +258,47 @@ function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
             --Change Active Item form
 
     elseif num == 10 then   --Eden
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_EDEN)
         --LoadLife
         --Change Active Item form
 
     elseif num == 11 then   --The Lost
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_THELOST)
         --No life to load
         --Change Active Item form
 
     elseif num == 12 then   --Lilith
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_LILITH)
         --LoadLife
         --Change Active Item form
         
     elseif num == 13 then   --Keeper
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_KEEPER)
         --LoadLife
         --Change Active Item form
 
     elseif num == 14 then   --Apollyon
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_APOLLYON)
         --LoadLife
         --Change Active Item form
 
     elseif num == 15 then   --The Forgotten
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_THEFORGOTTEN)
         --LoadLife (may be harder here)
         --Change Active Item form
 
     elseif num == 16 then   --Bethany
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_BETHANY)
         --LoadLife
         --Change Active Item form
 
     elseif num == 17 then   --Jacob (& Esau)
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_JACOB)
         --LoadLife
         --LoadLife for Esau
         --Change Active Item form
 
     else                    --Delirio
-        --StoreLife
         player:ChangePlayerType(PlayerType.PLAYER_DELIRIO) --Rajouter Delirio à l'enum (Je sais pas si ça marche ni comment on fait)
         --LoadLife
         --Change Active Item form
