@@ -92,7 +92,7 @@ function mod:UseUnchargedCurse()
             action = ButtonAction.ACTION_PILLCARD
         end
 
-        if not (slot == ActiveSlot.SLOT_SECONDARY or Game.IsPaused()) then
+        if not (slot == ActiveSlot.SLOT_SECONDARY or Game():IsPaused()) then
             if player:GetActiveCharge(slot) > 1 and Input.IsActionPressed(action, 0) then
                 player:UseActiveItem(DelirioCurse,0,-1)
                 player:DischargeActiveItem(slot)
