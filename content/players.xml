@@ -3,6 +3,6 @@
          nameimageroot="gfx/ui/boss/">
 	<player name="Delirio" skin="character_delirio.png" hp="6"
           nameimage="playername_delirio.png" 
-          portrait="playerportrait_delirio.png" skinColor="-1"
+          portrait="playerportrait_delirio.png" skinColor="0"
 		  birthright="Not implemented" />
 </players>
