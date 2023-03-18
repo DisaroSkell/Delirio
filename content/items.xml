@@ -1,15 +1,3 @@
 <items version="1" gfxroot="gfx/items/">
-    <active maxcharges="6" name="Delirio's Curse" gfx="DelirioCruse.png" description="Use it or you'll die" quality="1" tags="offensive nocantrip"/>
+    <active maxcharges="6" name="Delirio's Curse" gfx="DelirioCurse.png" description="Use it or you'll die" quality="1" tags="offensive nocantrip"/>
 </items>
-
-<!--
-    <items gfxroot="gfx/items/" version="1">
-	<active achievement="233" description="Reusable rune generator" gfx="RunicGeode.png" name="Runic Geode" maxcharges="6" quality="1" tags="offensive nocantrip"/>
-    </items>
-    
-    everything jar :
-    <active		id="720"	achievement="459" gfx="Collectibles_720_EverythingJar.png" name="Everything Jar" description="Anything is possible" maxcharges="12" initcharge="1" />
-
-    breath of life :
-    <active cooldown="31" description="Invincibility at a cost" gfx="collectibles_326_breathoflife.png" id="326" maxcharges="6" name="Breath of Life" chargetype="special" />
--->
