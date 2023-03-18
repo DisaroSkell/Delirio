@@ -1,5 +1,13 @@
 # Delirio Binding of Isaac Mod
 
+## Mod Description
+
+Delirio Mod adds a brand new character : Delirio.
+
+It comes with its own item : Delirio's Curse.
+
+The character concept is all about his item. It is a 6 charges active item. When you have it, you can't remove it anymore and if you let it go to full charge it will damage you every room. When used, you will turn into one of the other characters. You need at least 2 charges to use it.
+
 ## TODO-List:
 
 - Bugfix life when switching characters
