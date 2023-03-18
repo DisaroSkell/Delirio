@@ -5,6 +5,15 @@ local mod = delirio
 --Saves the item in a variable
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
+-- Give Delirio his curse when game starts
+function mod:addCurseToDelirio(e)
+    local player =Isaac.GetPlayer(0)
+    if player:GetName() == "Delirio" then
+        player:AddCollectible(DelirioCurse)
+    end
+end
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.addCurseToDelirio)
+
 --Uses storeLife function
 --Activates the item "Delirio's Curse" which makes the character change himself into another character
 function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)

@@ -1,0 +1,8 @@
+<players root="gfx/characters/costumes/" 
+         portraitroot="gfx/ui/stage/" 
+         nameimageroot="gfx/ui/boss/">
+	<player name="Delirio" skin="character_delirio.png" hp="6"
+          nameimage="playername_delirio.png" 
+          portrait="playerportrait_delirio.png" skinColor="-1"
+		  birthright="Not implemented" />
+</players>
