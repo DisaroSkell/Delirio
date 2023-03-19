@@ -27,7 +27,7 @@ The character concept is all about his item. It is a 6 charges active item. When
 
 ### GFX:
 
-- Resprite the item.
+- Resprite the item. (+ sprite for pause menu)
 - Do the character sprites (resources-dlc3\gfx\characters\costumes\character_delirio.png + resources-dlc3\gfx\ui\stage\playerportrait_delirio.png).
 - Change player costume when using item (+ gooey version of everyone).
 - Everything that involves the tinted version.
