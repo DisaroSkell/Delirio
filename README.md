@@ -25,6 +25,13 @@ The character concept is all about his item. It is a 6 charges active item. When
 - Put the character behind unlock conditions.
 - Make the tainted version.
 
+### GFX:
+
+- Resprite the item.
+- Do the character sprites (resources-dlc3\gfx\characters\costumes\character_delirio.png + resources-dlc3\gfx\ui\stage\playerportrait_delirio.png).
+- Change player costume when using item (+ gooey version of everyone).
+- Everything that involves the tinted version.
+
 ## Credits:
 
 Delirio Mod idea came from a drawing made on [reddit](https://www.reddit.com/r/bindingofisaac/comments/ol0zps/i_give_you_delierio_the_delirium_goop_that_wanted/) by [Sir-Wow](https://www.reddit.com/user/Sir-Wow/).
