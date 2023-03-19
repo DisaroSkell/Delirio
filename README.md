@@ -32,6 +32,10 @@ The character concept is all about his item. It is a 6 charges active item. When
 - Change player costume when using item (+ gooey version of everyone).
 - Everything that involves the tinted version.
 
+### VFX & SFX:
+
+- When the curse is used, put Delirium effects
+
 ## Credits:
 
 Delirio Mod idea came from a drawing made on [reddit](https://www.reddit.com/r/bindingofisaac/comments/ol0zps/i_give_you_delierio_the_delirium_goop_that_wanted/) by [Sir-Wow](https://www.reddit.com/user/Sir-Wow/).
