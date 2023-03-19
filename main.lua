@@ -1,8 +1,8 @@
---Saves the mod in a variable
+-- Saves the mod in a variable
 local delirio = RegisterMod("Delirio",1)
 local mod = delirio
 
---Saves the item in a variable
+-- Saves the item in a variable
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
 -- Give Delirio his curse when game starts
@@ -14,12 +14,11 @@ function mod:addCurseToDelirio(e)
 end
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.addCurseToDelirio)
 
---Uses storeLife function
---Activates the item "Delirio's Curse" which makes the character change himself into another character
+-- Activates the item "Delirio's Curse"
 function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
-	local num = rng:RandomInt(17)
+	local num = rng:RandomInt(17) -- Character number [0; 17[
 
-    --storeLife(player, num)
+    -- storeLife(player, num)
 
     if num == 0 then        --Isaac
         player:ChangePlayerType(PlayerType.PLAYER_ISAAC)
@@ -47,6 +46,7 @@ function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
 
     elseif num == 8 then    --Lazarus
         player:ChangePlayerType(PlayerType.PLAYER_LAZARUS)
+
     elseif num == 9 then    --Eden
         player:ChangePlayerType(PlayerType.PLAYER_EDEN)
 
@@ -55,7 +55,7 @@ function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
 
     elseif num == 11 then   --Lilith
         player:ChangePlayerType(PlayerType.PLAYER_LILITH)
-        
+
     elseif num == 12 then   --Keeper
         player:ChangePlayerType(PlayerType.PLAYER_KEEPER)
 
@@ -70,12 +70,8 @@ function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
 
     elseif num == 16 then   --Jacob (& Esau)
         player:ChangePlayerType(PlayerType.PLAYER_JACOB)
-        --Do some Esau BS
+        -- Do some Esau BS
 
-    --[[ Get to it later
-    else                    --Delirio
-        player:ChangePlayerType(PlayerType.PLAYER_DELIRIO)
-    ]]
     end
 
     -- loadLife(num)
@@ -83,9 +79,8 @@ function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
 end
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseDelirioCurse, DelirioCurse)
 
-
---Calls UseDelirioCurse function
---Allows the player to use the item while partially charged (minimum 2 charges)
+-- Calls UseDelirioCurse function
+-- Allows the player to use the item while partially charged (minimum 2 charges)
 function mod:UseUnchargedCurse()
     local player = Isaac.GetPlayer(0)
     local slot = -1
@@ -111,8 +106,7 @@ function mod:UseUnchargedCurse()
 end
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.UseUnchargedCurse)
 
-
---Damages the player if he has the full charged item and clears a room
+-- Damages the player if he has the full charged item and clears a room
 function mod:OverchargedCheck(RNG,pos)
     local player = Isaac.GetPlayer(0)
     local slot = -1
