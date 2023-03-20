@@ -6,8 +6,7 @@ local mod = delirio
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
 -- Give Delirio his curse when game starts
-function mod:addCurseToDelirio(e)
-    local player =Isaac.GetPlayer(0)
+function mod:addCurseToDelirio(player)
     if player:GetName() == "Delirio" then
         player:AddCollectible(DelirioCurse)
     end
@@ -15,7 +14,7 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.addCurseToDelirio)
 
 -- Activates the item "Delirio's Curse"
-function mod:UseDelirioCurse(delirioCurse, rng, player, flags, slot, data)
+function mod:UseDelirioCurse(delirioCurse, rng, player)
 	local num = rng:RandomInt(17) -- Character number [0; 17[
 
     -- storeLife(player, num)
@@ -83,7 +82,7 @@ mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseDelirioCurse, DelirioCurse)
 -- Allows the player to use the item while partially charged (minimum 2 charges)
 function mod:UseUnchargedCurse()
     local player = Isaac.GetPlayer(0)
-    local slot = -1
+    local slot = nil
     local action = -1
     if player:HasCollectible(DelirioCurse) then
         if player:GetActiveItem(ActiveSlot.SLOT_PRIMARY) == DelirioCurse then
@@ -96,9 +95,9 @@ function mod:UseUnchargedCurse()
             action = ButtonAction.ACTION_PILLCARD
         end
 
-        if not (slot == ActiveSlot.SLOT_SECONDARY or Game():IsPaused()) then
+        if not (slot == nil or Game():IsPaused()) then
             if player:GetActiveCharge(slot) > 1 and Input.IsActionPressed(action, 0) then
-                player:UseActiveItem(DelirioCurse,0,-1)
+                player:UseActiveItem(DelirioCurse)
                 player:DischargeActiveItem(slot)
             end
         end
@@ -109,7 +108,7 @@ mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.UseUnchargedCurse)
 -- Damages the player if he has the full charged item and clears a room
 function mod:OverchargedCheck(RNG,pos)
     local player = Isaac.GetPlayer(0)
-    local slot = -1
+    local slot = nil
     if player:HasCollectible(DelirioCurse) then
         if player:GetActiveItem(ActiveSlot.SLOT_PRIMARY) == DelirioCurse then
             slot = ActiveSlot.SLOT_PRIMARY
@@ -121,6 +120,10 @@ function mod:OverchargedCheck(RNG,pos)
 
         if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == DelirioCurse then
             slot = ActiveSlot.SLOT_POCKET
+        end
+
+        if player:GetActiveItem(ActiveSlot.SLOT_POCKET2) == DelirioCurse then
+            slot = ActiveSlot.SLOT_POCKET2
         end
 
         if player:GetActiveCharge(slot) == 6 then
