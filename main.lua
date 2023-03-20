@@ -1,3 +1,5 @@
+require "utils"
+
 -- Saves the mod in a variable
 local delirio = RegisterMod("Delirio",1)
 local mod = delirio
@@ -11,70 +13,73 @@ function mod:delirioInit(player)
         player:AddCollectible(DelirioCurse)
         player:AddEternalHearts(1)
     end
+
+    LifeInit()
 end
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.delirioInit)
 
 -- Activates the item "Delirio's Curse"
 function mod:UseDelirioCurse(delirioCurse, rng, player)
 	local num = rng:RandomInt(17) -- Character number [0; 17[
+    local nextPlayerType = PlayerType.PLAYER_POSSESSOR
 
-    -- storeLife(player, num)
+    StoreLife(player)
 
     if num == 0 then        --Isaac
-        player:ChangePlayerType(PlayerType.PLAYER_ISAAC)
+        nextPlayerType = PlayerType.PLAYER_ISAAC
 
     elseif num == 1 then    --Magdalene
-        player:ChangePlayerType(PlayerType.PLAYER_MAGDALENA)
+        nextPlayerType = PlayerType.PLAYER_MAGDALENA
 
     elseif num == 2 then    --Cain
-        player:ChangePlayerType(PlayerType.PLAYER_CAIN)
+        nextPlayerType = PlayerType.PLAYER_CAIN
 
     elseif num == 3 then    --Judas
-        player:ChangePlayerType(PlayerType.PLAYER_JUDAS)
+        nextPlayerType = PlayerType.PLAYER_JUDAS
 
     elseif num == 4 then    --BlueBaby
-        player:ChangePlayerType(PlayerType.PLAYER_XXX)
+        nextPlayerType = PlayerType.PLAYER_XXX
 
     elseif num == 5 then    --Eve
-        player:ChangePlayerType(PlayerType.PLAYER_EVE)
+        nextPlayerType = PlayerType.PLAYER_EVE
 
     elseif num == 6 then    --Samson
-        player:ChangePlayerType(PlayerType.PLAYER_SAMSON)
+        nextPlayerType = PlayerType.PLAYER_SAMSON
 
     elseif num == 7 then    --Azazel
-        player:ChangePlayerType(PlayerType.PLAYER_AZAZEL)
+        nextPlayerType = PlayerType.PLAYER_AZAZEL
 
     elseif num == 8 then    --Lazarus
-        player:ChangePlayerType(PlayerType.PLAYER_LAZARUS)
+        nextPlayerType = PlayerType.PLAYER_LAZARUS
 
     elseif num == 9 then    --Eden
-        player:ChangePlayerType(PlayerType.PLAYER_EDEN)
+        nextPlayerType = PlayerType.PLAYER_EDEN
 
     elseif num == 10 then   --The Lost
-        player:ChangePlayerType(PlayerType.PLAYER_THELOST)
+        nextPlayerType = PlayerType.PLAYER_THELOST
 
     elseif num == 11 then   --Lilith
-        player:ChangePlayerType(PlayerType.PLAYER_LILITH)
+        nextPlayerType = PlayerType.PLAYER_LILITH
 
     elseif num == 12 then   --Keeper
-        player:ChangePlayerType(PlayerType.PLAYER_KEEPER)
+        nextPlayerType = PlayerType.PLAYER_KEEPER
 
     elseif num == 13 then   --Apollyon
-        player:ChangePlayerType(PlayerType.PLAYER_APOLLYON)
+        nextPlayerType = PlayerType.PLAYER_APOLLYON
 
     elseif num == 14 then   --The Forgotten
-        player:ChangePlayerType(PlayerType.PLAYER_THEFORGOTTEN)
+        nextPlayerType = PlayerType.PLAYER_THEFORGOTTEN
 
     elseif num == 15 then   --Bethany
-        player:ChangePlayerType(PlayerType.PLAYER_BETHANY)
+        nextPlayerType = PlayerType.PLAYER_BETHANY
 
     elseif num == 16 then   --Jacob (& Esau)
-        player:ChangePlayerType(PlayerType.PLAYER_JACOB)
-        -- Do some Esau BS
-
+        nextPlayerType = PlayerType.PLAYER_JACOB
+        -- Do some Esau BS (Maybe)
     end
 
-    -- loadLife(num)
+    player:ChangePlayerType(nextPlayerType)
+    LoadLife(player, nextPlayerType)
     -- changeActive()
 end
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseDelirioCurse, DelirioCurse)
