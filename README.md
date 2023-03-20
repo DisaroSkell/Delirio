@@ -13,6 +13,7 @@ The character concept is all about his item. It is a 6 charges active item. When
 ### Bug fixes:
 
 - Bugfix life when switching characters.
+- When game starts, eternal heart is completely bugged
 
 ### Item updates:
 
