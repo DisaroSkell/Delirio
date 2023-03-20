@@ -5,13 +5,14 @@ local mod = delirio
 -- Saves the item in a variable
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
--- Give Delirio his curse when game starts
-function mod:addCurseToDelirio(player)
+-- Does the Delirio initialization (give active item and eternal heart)
+function mod:delirioInit(player)
     if player:GetName() == "Delirio" then
         player:AddCollectible(DelirioCurse)
+        player:AddEternalHearts(1)
     end
 end
-mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.addCurseToDelirio)
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.delirioInit)
 
 -- Activates the item "Delirio's Curse"
 function mod:UseDelirioCurse(delirioCurse, rng, player)
