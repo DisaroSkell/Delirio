@@ -29,8 +29,9 @@ function LifeBar:new(o, redCount, containerCount, soulCount, blackCount, boneCou
     goldenCount = goldenCount or 0
     brokenCount = brokenCount or 0
 
-    setmetatable(o, self)
     self.__hearts = {}
+
+    setmetatable(self.__hearts, self.__hearts)
 
     self.__hearts[HeartType.RED] = redCount
     self.__hearts[HeartType.CONTAINER] = containerCount
@@ -79,11 +80,11 @@ end
 
 ---Function to display DelirioLife (debug purposes)
 ---@return string
-function LifeBar:ToString()
+function LifeBar:__tostring()
 	local result = ""
 
-    for index, elem in ipairs(self.__hearts) do
-		result = result .. elem.tostring()
+    for index, heartCount in ipairs(self.__hearts) do
+        result = result .. heartCount
         result = result .. " - "
 	end
 

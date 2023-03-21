@@ -15,6 +15,8 @@ function DelirioLife:new(o)
 
     self.__characters = {}
 
+    setmetatable(self.__characters, self.__characters)
+
     self.__characters[PlayerType.PLAYER_ISAAC] = LifeBar:new({}, 6, 3)
     self.__characters[PlayerType.PLAYER_MAGDALENE] = LifeBar:new({}, 8, 4)
 	self.__characters[PlayerType.PLAYER_CAIN] = LifeBar:new({}, 4, 2)
@@ -66,15 +68,15 @@ end
 
 ---Function to display DelirioLife (debug purposes)
 ---@return string
-function DelirioLife:ToString()
+function DelirioLife:__tostring()
 	local result = ""
 
-	for index, elem in ipairs(self.__characters) do
-		result = result .. elem:ToString()
+	for index, lifebar in ipairs(self.__characters) do
+		result = result .. lifebar:__tostring()
 		result = result .. "\n"
 	end
 
-	result = result .. self.__delirio:ToString()
+	result = result .. self.__delirio:__tostring()
 
 	return result
 end
