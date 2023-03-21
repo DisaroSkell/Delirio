@@ -69,6 +69,7 @@ function DelirioLife:ToString()
 
 	for index, elem in ipairs(self.__characters) do
 		result = result .. elem:ToString()
+		result = result .. "\n"
 	end
 
 	result = result .. self.__characters["Delirio"]:ToString()

@@ -84,6 +84,7 @@ function LifeBar:ToString()
 
     for index, elem in ipairs(self.__hearts) do
 		result = result .. elem.tostring()
+        result = result .. " - "
 	end
 
 	return result
