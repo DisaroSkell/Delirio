@@ -2,6 +2,7 @@ require "script.LifeBar"
 
 ---@class DelirioLife
 ---@field characters table
+---@field delirio LifeBar
 DelirioLife = {}
 
 ---@param o? DelirioLife @default: {}
@@ -35,7 +36,8 @@ function DelirioLife:new(o)
 	self.__characters[PlayerType.PLAYER_BETHANY] = LifeBar:new({}, 6, 3)
 	self.__characters[PlayerType.PLAYER_JACOB] = LifeBar:new({}, 6, 3)
 	self.__characters[PlayerType.PLAYER_ESAU] = LifeBar:new({}, 2, 1, 2)
-    self.__characters["Delirio"] = LifeBar:new({}, 0, 0, 0, 2, 0, 1)
+
+    self.__delirio = LifeBar:new({}, 0, 0, 0, 2, 0, 1)
 
     return o
 end
@@ -54,12 +56,12 @@ end
 
 ---@return LifeBar
 function DelirioLife:GetDelirioLife()
-    return self.__characters["Delirio"]
+    return self.__delirio
 end
 
 ---@param life LifeBar
 function DelirioLife:ChangeDelirioLife(life)
-    self.__characters["Delirio"] = life
+    self.__delirio = life
 end
 
 ---Function to display DelirioLife (debug purposes)
@@ -72,7 +74,7 @@ function DelirioLife:ToString()
 		result = result .. "\n"
 	end
 
-	result = result .. self.__characters["Delirio"]:ToString()
+	result = result .. self.__delirio:ToString()
 
 	return result
 end
