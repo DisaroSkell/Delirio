@@ -43,10 +43,15 @@ function LifeBar.new(redCount, containerCount, soulCount, blackCount, boneCount,
     return instance
 end
 
+---Constructor
+---@param player EntityPlayer
+---@return LifeBar
 function LifeBar.newFromPlayer(player)
+    local realSoulCount = player:GetSoulHearts() - player:GetBlackHearts()
+
     return LifeBar.new( player:GetHearts(),
                         player:GetMaxHearts(),
-                        player:GetSoulHearts(),
+                        realSoulCount,
                         player:GetBlackHearts(),
                         player:GetBoneHearts(),
                         player:GetEternalHearts(),

@@ -13,7 +13,8 @@ The character concept is all about his item. It is a 6 charges active item. When
 ### Bug fixes:
 
 - KEEPER
-- Bugfix life when switching characters. (Still bugged but better than before)
+- Bethany soul charge
+- Double char save/load
 
 ### Item updates:
 
