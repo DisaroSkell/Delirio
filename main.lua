@@ -104,7 +104,7 @@ function mod:UseUnchargedCurse()
         if not (slot == nil or Game():IsPaused()) then
             if player:GetActiveCharge(slot) > 1 and Input.IsActionPressed(action, 0) then
                 player:UseActiveItem(DelirioCurse)
-                player:DischargeActiveItem(slot)
+                player:SetActiveCharge(player:GetBatteryCharge(slot), slot)
             end
         end
     end
@@ -132,7 +132,7 @@ function mod:OverchargedCheck(RNG,pos)
             slot = ActiveSlot.SLOT_POCKET2
         end
 
-        if player:GetActiveCharge(slot) == 6 then
+        if player:GetActiveCharge(slot) >= 6 then
             player:TakeDamage(1,0,EntityRef(player),0)
         end
     end
