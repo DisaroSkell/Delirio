@@ -13,6 +13,7 @@ local itemUsed = false
 function mod:delirioInit(player)
     if player:GetName() == "Delirio" then
         player:AddCollectible(DelirioCurse)
+        player:AddEternalHearts(1)
     end
 
     LifeInit()
