@@ -7,7 +7,8 @@ function LifeInit()
     Delirio = DelirioLife:new()
 end
 
--- Life storage here
+---Life storage here
+---@param player EntityPlayer
 function StoreLife(player)
     local life = LifeBar.newFromPlayer(player)
 
@@ -18,7 +19,9 @@ function StoreLife(player)
     end
 end
 
--- Life loading there
+---Life loading there
+---@param player EntityPlayer
+---@param nextPlayerType PlayerType
 function LoadLife(player, nextPlayerType)
     local currentLife = LifeBar.newFromPlayer(player)
     local goalLife = {}
@@ -45,8 +48,10 @@ function LoadLife(player, nextPlayerType)
     player:AddBlackHearts(goalLife:GetHeartCount(HeartType.BLACK) - player:GetBlackHearts())
 end
 
--- Converts the int into PlayerType enum
--- 0 is Isaac, 1 is Maggy... 16 is Jacob&Esau
+---Converts the int into PlayerType enum
+---0 is Isaac, 1 is Maggy... 16 is Jacob&Esau
+---@param n integer
+---@return PlayerType
 function ChosePlayerFromInt(n)
     local result = PlayerType.PLAYER_POSSESSOR
 
