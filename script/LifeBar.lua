@@ -83,10 +83,19 @@ end
 function LifeBar:__tostring()
 	local result = ""
 
-    for index, heartCount in ipairs(self.__hearts) do
+    for key, heartCount in pairs(self.__hearts) do
+        result = result .. key
+        result = result .. ": "
+
         result = result .. heartCount
         result = result .. " - "
 	end
+
+    local size = string.len(result)
+
+    if size > 3 then
+        result = string.sub(result, 1, size-3)
+    end
 
 	return result
 end
