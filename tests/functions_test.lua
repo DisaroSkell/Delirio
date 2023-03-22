@@ -2,6 +2,7 @@ package.path = package.path .. ";../?.lua"
 require "script.DelirioLife"
 require "tests.isaac_enums.PlayerType"
 
+-- Tests the getter of the LifeBar
 function LifeBarGetterTest()
     local bar = LifeBar.new(5, 3, 5)
 
@@ -15,6 +16,7 @@ function LifeBarGetterTest()
     return result
 end
 
+-- Tests if creating a second instance overwrites the first one
 function LifeBarConstructorOverwriteTest()
     local bar1 = LifeBar.new(5, 3, 5)
     local bar2 = LifeBar.new(6, 5, 4)
@@ -29,6 +31,7 @@ function LifeBarConstructorOverwriteTest()
     return result
 end
 
+-- Tests if the diff method works as expected
 function LifeBarDiffTest()
     local bar1 = LifeBar.new(5, 3, 5)
     local bar2 = LifeBar.new(6, 5, 4)

@@ -23,62 +23,9 @@ mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.delirioInit)
 -- Activates the item "Delirio's Curse"
 function mod:UseDelirioCurse(delirioCurse, rng, player)
 	local num = rng:RandomInt(17) -- Character number [0; 17[
-    local nextPlayerType = PlayerType.PLAYER_POSSESSOR
+    local nextPlayerType = ChosePlayerFromInt(num)
 
     StoreLife(player)
-
-    if num == 0 then        --Isaac
-        nextPlayerType = PlayerType.PLAYER_ISAAC
-
-    elseif num == 1 then    --Magdalene
-        nextPlayerType = PlayerType.PLAYER_MAGDALENA
-
-    elseif num == 2 then    --Cain
-        nextPlayerType = PlayerType.PLAYER_CAIN
-
-    elseif num == 3 then    --Judas
-        nextPlayerType = PlayerType.PLAYER_JUDAS
-
-    elseif num == 4 then    --BlueBaby
-        nextPlayerType = PlayerType.PLAYER_XXX
-
-    elseif num == 5 then    --Eve
-        nextPlayerType = PlayerType.PLAYER_EVE
-
-    elseif num == 6 then    --Samson
-        nextPlayerType = PlayerType.PLAYER_SAMSON
-
-    elseif num == 7 then    --Azazel
-        nextPlayerType = PlayerType.PLAYER_AZAZEL
-
-    elseif num == 8 then    --Lazarus
-        nextPlayerType = PlayerType.PLAYER_LAZARUS
-
-    elseif num == 9 then    --Eden
-        nextPlayerType = PlayerType.PLAYER_EDEN
-
-    elseif num == 10 then   --The Lost
-        nextPlayerType = PlayerType.PLAYER_THELOST
-
-    elseif num == 11 then   --Lilith
-        nextPlayerType = PlayerType.PLAYER_LILITH
-
-    elseif num == 12 then   --Keeper
-        nextPlayerType = PlayerType.PLAYER_KEEPER
-
-    elseif num == 13 then   --Apollyon
-        nextPlayerType = PlayerType.PLAYER_APOLLYON
-
-    elseif num == 14 then   --The Forgotten
-        nextPlayerType = PlayerType.PLAYER_THEFORGOTTEN
-
-    elseif num == 15 then   --Bethany
-        nextPlayerType = PlayerType.PLAYER_BETHANY
-
-    elseif num == 16 then   --Jacob (& Esau)
-        nextPlayerType = PlayerType.PLAYER_JACOB
-        -- Do some Esau BS (Maybe)
-    end
 
     player:ChangePlayerType(nextPlayerType)
     LoadLife(player, nextPlayerType)

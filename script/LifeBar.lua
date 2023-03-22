@@ -43,7 +43,7 @@ function LifeBar.new(redCount, containerCount, soulCount, blackCount, boneCount,
     return instance
 end
 
----Constructor
+---Constructor of the class
 ---@param player EntityPlayer
 ---@return LifeBar
 function LifeBar.newFromPlayer(player)
@@ -80,7 +80,7 @@ function LifeBar:Diff(otherBar)
                         self:GetHeartCount(HeartType.BROKEN) - otherBar:GetHeartCount(HeartType.BROKEN))
 end
 
----Function to display DelirioLife (debug purposes)
+---Function to display the LifeBar (debug purposes)
 ---@return string
 function LifeBar:__tostring()
 	local result = ""

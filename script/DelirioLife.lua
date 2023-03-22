@@ -43,23 +43,27 @@ function DelirioLife.new()
     return instance
 end
 
+---Getter for characters tab elements
 ---@param player PlayerType
 ---@return LifeBar
 function DelirioLife:GetLife(player)
     return self.characters[player]
 end
 
+---Setter for characters tab elements
 ---@param player PlayerType
 ---@param life LifeBar
 function DelirioLife:ChangeLife(player, life)
     self.characters[player] = life
 end
 
+---Getter for delirio's life (his true form)
 ---@return LifeBar
 function DelirioLife:GetDelirioLife()
     return self.delirio
 end
 
+---Setter for delirio's life (his true form)
 ---@param life LifeBar
 function DelirioLife:ChangeDelirioLife(life)
     self.delirio = life
