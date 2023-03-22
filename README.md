@@ -12,8 +12,9 @@ The character concept is all about his item. It is a 6 charges active item. When
 
 ### Bug fixes:
 
-- Bugfix life when switching characters.
 - When game starts, eternal heart is completely bugged -> Delirio is considered at 2 soul 1 black
+- KEEPER
+- Bugfix life when switching characters. (Still bugged but better than before)
 
 ### Item updates:
 

@@ -30,12 +30,16 @@ function LoadLife(player, nextPlayerType)
 
     local diff = goalLife:Diff(currentLife)
 
-    player:AddHearts(diff:GetHeartCount(HeartType.RED))
+    Isaac.DebugString(diff:__tostring() .. "\n")
+
+    player:AddBrokenHearts(diff:GetHeartCount(HeartType.BROKEN))
     player:AddMaxHearts(diff:GetHeartCount(HeartType.CONTAINER))
+    player:AddBoneHearts(diff:GetHeartCount(HeartType.BONE))
     player:AddSoulHearts(diff:GetHeartCount(HeartType.SOUL))
     player:AddBlackHearts(diff:GetHeartCount(HeartType.BLACK))
-    player:AddBoneHearts(diff:GetHeartCount(HeartType.BONE))
     player:AddEternalHearts(diff:GetHeartCount(HeartType.ETERNAL))
     player:AddGoldenHearts(diff:GetHeartCount(HeartType.GOLDEN))
-    player:AddBrokenHearts(diff:GetHeartCount(HeartType.BROKEN))
+
+    -- Because containers moved, the diff isn't accurate
+    player:AddHearts(goalLife:GetHeartCount(HeartType.RED) - player:GetHearts())
 end

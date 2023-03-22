@@ -45,7 +45,7 @@ end
 
 function LifeBar.newFromPlayer(player)
     return LifeBar.new( player:GetHearts(),
-                        player:GetMaxHearts()/2,
+                        player:GetMaxHearts(),
                         player:GetSoulHearts(),
                         player:GetBlackHearts(),
                         player:GetBoneHearts(),
@@ -61,8 +61,9 @@ function LifeBar:GetHeartCount(type)
     return self.hearts[type]
 end
 
+---Function to calculate the difference of every fields between two LifeBars
 ---@param otherBar LifeBar
----@overload fun(otherBar: LifeBar)
+---@return LifeBar
 function LifeBar:Diff(otherBar)
     return LifeBar.new( self:GetHeartCount(HeartType.RED) - otherBar:GetHeartCount(HeartType.RED),
                         self:GetHeartCount(HeartType.CONTAINER) - otherBar:GetHeartCount(HeartType.CONTAINER),
