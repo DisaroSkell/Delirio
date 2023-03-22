@@ -1,4 +1,4 @@
-require "utils"
+require "main-utils"
 
 -- Saves the mod in a variable
 local delirio = RegisterMod("Delirio",1)
@@ -6,6 +6,8 @@ local mod = delirio
 
 -- Saves the item in a variable
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
+
+local itemUsed = false
 
 -- Does the Delirio initialization (give active item and eternal heart)
 function mod:delirioInit(player)
@@ -81,6 +83,8 @@ function mod:UseDelirioCurse(delirioCurse, rng, player)
     player:ChangePlayerType(nextPlayerType)
     LoadLife(player, nextPlayerType)
     -- changeActive()
+
+    itemUsed = true
 end
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseDelirioCurse, DelirioCurse)
 
@@ -90,6 +94,12 @@ function mod:UseUnchargedCurse()
     local player = Isaac.GetPlayer(0)
     local slot = nil
     local action = -1
+
+    if itemUsed then
+        itemUsed = false
+        return
+    end
+
     if player:HasCollectible(DelirioCurse) then
         if player:GetActiveItem(ActiveSlot.SLOT_PRIMARY) == DelirioCurse then
             slot = ActiveSlot.SLOT_PRIMARY
@@ -102,9 +112,9 @@ function mod:UseUnchargedCurse()
         end
 
         if not (slot == nil or Game():IsPaused()) then
-            if player:GetActiveCharge(slot) > 1 and Input.IsActionPressed(action, 0) then
+            if player:GetActiveCharge(slot) > 1 and Input.IsActionTriggered(action, 0) then
                 player:UseActiveItem(DelirioCurse)
-                player:SetActiveCharge(player:GetBatteryCharge(slot), slot)
+                player:DischargeActiveItem(slot)
             end
         end
     end
