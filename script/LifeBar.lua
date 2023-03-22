@@ -4,7 +4,10 @@ require "script.HeartType"
 ---@field hearts table
 LifeBar = {}
 
----@param o? LifeBar @default: {}
+MetaLifeBar = {}
+MetaLifeBar.__index = LifeBar
+
+---Constructor of the class
 ---@param redCount? integer @default: 0
 ---@param containerCount? integer @default: 0
 ---@param soulCount? integer @default: 0
@@ -14,11 +17,8 @@ LifeBar = {}
 ---@param goldenCount? integer @default: 0
 ---@param brokenCount? integer @default: 0
 ---@return LifeBar
-function LifeBar:new(o, redCount, containerCount, soulCount, blackCount, boneCount, eternalCount, goldenCount, brokenCount)
-    o = o or {}
-
-    setmetatable(o, self)
-    self.__index = self
+function LifeBar.new(redCount, containerCount, soulCount, blackCount, boneCount, eternalCount, goldenCount, brokenCount)
+    local instance = setmetatable({}, MetaLifeBar)
 
     redCount = redCount or 0
     containerCount = containerCount or 0
@@ -29,25 +29,22 @@ function LifeBar:new(o, redCount, containerCount, soulCount, blackCount, boneCou
     goldenCount = goldenCount or 0
     brokenCount = brokenCount or 0
 
-    self.__hearts = {}
+    instance.hearts = {}
 
-    setmetatable(self.__hearts, self.__hearts)
+    instance.hearts[HeartType.RED] = redCount
+    instance.hearts[HeartType.CONTAINER] = containerCount
+    instance.hearts[HeartType.SOUL] = soulCount
+    instance.hearts[HeartType.BLACK] = blackCount
+    instance.hearts[HeartType.BONE] = boneCount
+    instance.hearts[HeartType.ETERNAL] = eternalCount
+    instance.hearts[HeartType.GOLDEN] = goldenCount
+    instance.hearts[HeartType.BROKEN] = brokenCount
 
-    self.__hearts[HeartType.RED] = redCount
-    self.__hearts[HeartType.CONTAINER] = containerCount
-    self.__hearts[HeartType.SOUL] = soulCount
-    self.__hearts[HeartType.BLACK] = blackCount
-    self.__hearts[HeartType.BONE] = boneCount
-    self.__hearts[HeartType.ETERNAL] = eternalCount
-    self.__hearts[HeartType.GOLDEN] = goldenCount
-    self.__hearts[HeartType.BROKEN] = brokenCount
-
-    return o
+    return instance
 end
 
-function LifeBar:newFromPlayer(player)
-    return LifeBar:new( {},
-                        player:GetHearts(),
+function LifeBar.newFromPlayer(player)
+    return LifeBar.new( player:GetHearts(),
                         player:GetMaxHearts()/2,
                         player:GetSoulHearts(),
                         player:GetBlackHearts(),
@@ -61,14 +58,13 @@ end
 ---@param type HeartType
 ---@return integer
 function LifeBar:GetHeartCount(type)
-    return self.__hearts[type]
+    return self.hearts[type]
 end
 
 ---@param otherBar LifeBar
 ---@overload fun(otherBar: LifeBar)
 function LifeBar:Diff(otherBar)
-    return LifeBar:new( {},
-                        self:GetHeartCount(HeartType.RED) - otherBar:GetHeartCount(HeartType.RED),
+    return LifeBar.new( self:GetHeartCount(HeartType.RED) - otherBar:GetHeartCount(HeartType.RED),
                         self:GetHeartCount(HeartType.CONTAINER) - otherBar:GetHeartCount(HeartType.CONTAINER),
                         self:GetHeartCount(HeartType.SOUL) - otherBar:GetHeartCount(HeartType.SOUL),
                         self:GetHeartCount(HeartType.BLACK) - otherBar:GetHeartCount(HeartType.BLACK),
@@ -83,7 +79,7 @@ end
 function LifeBar:__tostring()
 	local result = ""
 
-    for key, heartCount in pairs(self.__hearts) do
+    for key, heartCount in pairs(self.hearts) do
         result = result .. key
         result = result .. ": "
 

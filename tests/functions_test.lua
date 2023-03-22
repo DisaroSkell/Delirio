@@ -3,7 +3,7 @@ require "script.DelirioLife"
 require "tests.isaac_enums.PlayerType"
 
 function LifeBarGetterTest()
-    local bar = LifeBar:new({}, 5, 3, 5)
+    local bar = LifeBar.new(5, 3, 5)
 
     local result = bar:GetHeartCount(HeartType.SOUL) == 5
 
@@ -16,8 +16,8 @@ function LifeBarGetterTest()
 end
 
 function LifeBarConstructorOverwriteTest()
-    local bar1 = LifeBar:new({}, 5, 3, 5)
-    local bar2 = LifeBar:new({}, 6, 5, 4)
+    local bar1 = LifeBar.new(5, 3, 5)
+    local bar2 = LifeBar.new(6, 5, 4)
 
     local result = bar1:GetHeartCount(HeartType.SOUL) == 5
 
@@ -30,8 +30,8 @@ function LifeBarConstructorOverwriteTest()
 end
 
 function LifeBarDiffTest()
-    local bar1 = LifeBar:new({}, 5, 3, 5)
-    local bar2 = LifeBar:new({}, 6, 5, 4)
+    local bar1 = LifeBar.new(5, 3, 5)
+    local bar2 = LifeBar.new(6, 5, 4)
 
     local diff = bar1:Diff(bar2)
 
