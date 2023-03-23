@@ -32,7 +32,7 @@ function DelirioLife.new()
 	instance.characters[PlayerType.PLAYER_KEEPER] = LifeBar.new(3, 3) ---@TODO Help please.
 	instance.characters[PlayerType.PLAYER_APOLLYON] = LifeBar.new(4, 4)
 	instance.characters[PlayerType.PLAYER_THEFORGOTTEN] = LifeBar.new(4, 0, 0, 0, 2)
-	instance.characters[PlayerType.PLAYER_THESOUL] = LifeBar.new(0, 0, 1)
+	instance.characters[PlayerType.PLAYER_THESOUL] = LifeBar.new(0, 0, 2)
 	instance.characters[PlayerType.PLAYER_BETHANY] = LifeBar.new(6, 6)
 	instance.characters[PlayerType.PLAYER_JACOB] = LifeBar.new(6, 6)
 	instance.characters[PlayerType.PLAYER_ESAU] = LifeBar.new(2, 2, 2)
