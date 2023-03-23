@@ -207,3 +207,18 @@ function BlackHeartMaskToBoolTab(mask)
 
 	return result
 end
+
+---Function to count how many true are in the tab
+---@param tab table
+---@return integer
+function CountBoolTab(tab)
+	local count = 0
+
+	for _, value in ipairs(tab) do
+		if value then
+			count = count + 1
+		end
+	end
+
+	return count
+end

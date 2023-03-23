@@ -34,4 +34,16 @@ if (MaskTooBigTest()) then
 end
 test_count = test_count + 1
 
+if (CountBoolTabTest()) then
+    grade = grade + 1
+    print("CountBoolTabTest passed.")
+end
+test_count = test_count + 1
+
+if (MaskToCountTest()) then
+    grade = grade + 1
+    print("MaskToCountTest passed.")
+end
+test_count = test_count + 1
+
 print(grade .. "/" .. test_count .. " tests passed.")

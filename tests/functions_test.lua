@@ -75,3 +75,33 @@ function MaskTooBigTest()
 
     return result
 end
+
+-- Tests if the function counts as expected
+function CountBoolTabTest()
+    local testTab = {false, true, false, true, false, false, false, false, true, false, false, true}
+
+    local count = CountBoolTab(testTab)
+
+    local result = count == 4
+
+    if not result then
+        print("CountBoolTabTest failed:")
+        print("Expected 4, got " .. tostring(count))
+    end
+
+    return result
+end
+
+-- Cross test between MaskToBoolTab and CountBoolTab
+function MaskToCountTest()
+    local count = CountBoolTab(BlackHeartMaskToBoolTab(7))
+
+    local result = count == 3
+
+    if not result then
+        print("MaskToCountTest failed:")
+        print("Expected 3, got " .. tostring(count))
+    end
+
+    return result
+end
