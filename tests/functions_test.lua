@@ -47,3 +47,31 @@ function LifeBarDiffTest()
 
     return result
 end
+
+-- Tests if the conversion works as expected
+function MaskToBoolTabTest()
+    local tab = BlackHeartMaskToBoolTab(7)
+
+    local result = tab[1] and tab[2] and tab[3]
+
+    if not result then
+        print("MaskToBoolTabTest failed:")
+        print("Expected true from index 1, 2 and 3, got " .. tostring(tab[1]) .. ", " .. tostring(tab[2]) .. " and " .. tostring(tab[3]))
+    end
+
+    return result
+end
+
+-- Tests if the function handles mask that are too big
+function MaskTooBigTest()
+    local tab = BlackHeartMaskToBoolTab(4096)
+
+    local result = tab[1] == nil
+
+    if not result then
+        print("MaskTooBigTest failed:")
+        print("Expected empty tab, got " .. tostring(tab[1]) .. " at index 1")
+    end
+
+    return result
+end

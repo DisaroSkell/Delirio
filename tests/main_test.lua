@@ -22,4 +22,16 @@ if (LifeBarDiffTest()) then
 end
 test_count = test_count + 1
 
+if (MaskToBoolTabTest()) then
+    grade = grade + 1
+    print("MaskToBoolTabTest passed.")
+end
+test_count = test_count + 1
+
+if (MaskTooBigTest()) then
+    grade = grade + 1
+    print("MaskTooBigTest passed.")
+end
+test_count = test_count + 1
+
 print(grade .. "/" .. test_count .. " tests passed.")
