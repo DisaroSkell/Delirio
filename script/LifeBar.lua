@@ -1,3 +1,4 @@
+require "script.script-utils"
 require "script.HeartType"
 
 ---@class LifeBar
@@ -43,11 +44,18 @@ function LifeBar.new(redCount, containerCount, soulCount, blackCount, boneCount,
     return instance
 end
 
+---Constructor of the class
+---@param player EntityPlayer
+---@return LifeBar
 function LifeBar.newFromPlayer(player)
+    local realBlackCount = CountBoolTab(BlackHeartMaskToBoolTab(player:GetBlackHearts()))*2
+
+    local realSoulCount = player:GetSoulHearts() - realBlackCount
+
     return LifeBar.new( player:GetHearts(),
-                        player:GetMaxHearts()/2,
-                        player:GetSoulHearts(),
-                        player:GetBlackHearts(),
+                        player:GetMaxHearts(),
+                        realSoulCount,
+                        realBlackCount,
                         player:GetBoneHearts(),
                         player:GetEternalHearts(),
                         player:GetGoldenHearts(),
@@ -61,8 +69,9 @@ function LifeBar:GetHeartCount(type)
     return self.hearts[type]
 end
 
+---Function to calculate the difference of every fields between two LifeBars
 ---@param otherBar LifeBar
----@overload fun(otherBar: LifeBar)
+---@return LifeBar
 function LifeBar:Diff(otherBar)
     return LifeBar.new( self:GetHeartCount(HeartType.RED) - otherBar:GetHeartCount(HeartType.RED),
                         self:GetHeartCount(HeartType.CONTAINER) - otherBar:GetHeartCount(HeartType.CONTAINER),
@@ -74,7 +83,7 @@ function LifeBar:Diff(otherBar)
                         self:GetHeartCount(HeartType.BROKEN) - otherBar:GetHeartCount(HeartType.BROKEN))
 end
 
----Function to display DelirioLife (debug purposes)
+---Function to display the LifeBar (debug purposes)
 ---@return string
 function LifeBar:__tostring()
 	local result = ""

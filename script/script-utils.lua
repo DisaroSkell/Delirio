@@ -178,3 +178,47 @@ function PlayerTypeString(playerType)
 
 	return result
 end
+
+---Function to convert the mask you get from GetBlackHearts to a boolean array
+---@param mask integer maximum (2^12)-1
+---@return table; {} if mask if too big
+function BlackHeartMaskToBoolTab(mask)
+	if mask > 4095 then
+		local debug = "BlackHearts mask given is too big !"
+
+		if Isaac == nil then
+			print(debug)
+		else
+			Isaac.ConsoleOutput(debug)
+		end
+
+		return {};
+	end
+
+	local result = {false, false, false, false, false, false, false, false, false, false, false, false}
+	local currentMask = mask
+
+	for i = 11, 0, -1 do
+		if currentMask >= 2^i then
+			result[i+1] = true
+			currentMask = currentMask - 2^i
+		end
+	end
+
+	return result
+end
+
+---Function to count how many true are in the tab
+---@param tab table
+---@return integer
+function CountBoolTab(tab)
+	local count = 0
+
+	for _, value in ipairs(tab) do
+		if value then
+			count = count + 1
+		end
+	end
+
+	return count
+end

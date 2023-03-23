@@ -1,5 +1,4 @@
 require "script.LifeBar"
-require "script.script-utils"
 
 ---@class DelirioLife
 ---@field characters table
@@ -16,50 +15,54 @@ function DelirioLife.new()
 
     instance.characters = {}
 
-    instance.characters[PlayerType.PLAYER_ISAAC] = LifeBar.new(6, 3)
-    instance.characters[PlayerType.PLAYER_MAGDALENE] = LifeBar.new(8, 4)
-	instance.characters[PlayerType.PLAYER_CAIN] = LifeBar.new(4, 2)
-	instance.characters[PlayerType.PLAYER_JUDAS] = LifeBar.new(2, 1)
+    instance.characters[PlayerType.PLAYER_ISAAC] = LifeBar.new(6, 6)
+    instance.characters[PlayerType.PLAYER_MAGDALENE] = LifeBar.new(8, 8)
+	instance.characters[PlayerType.PLAYER_CAIN] = LifeBar.new(4, 4)
+	instance.characters[PlayerType.PLAYER_JUDAS] = LifeBar.new(2, 2)
 	instance.characters[PlayerType.PLAYER_BLUEBABY] = LifeBar.new(0, 0, 6)
-	instance.characters[PlayerType.PLAYER_EVE] = LifeBar.new(4, 2)
-	instance.characters[PlayerType.PLAYER_SAMSON] = LifeBar.new(6, 3)
+	instance.characters[PlayerType.PLAYER_EVE] = LifeBar.new(4, 4)
+	instance.characters[PlayerType.PLAYER_SAMSON] = LifeBar.new(6, 6)
 	instance.characters[PlayerType.PLAYER_AZAZEL] = LifeBar.new(0, 0, 0, 6)
-	instance.characters[PlayerType.PLAYER_LAZARUS] = LifeBar.new(6, 3)
-	instance.characters[PlayerType.PLAYER_EDEN] = LifeBar.new(6, 3) ---@TODO make this random
+	instance.characters[PlayerType.PLAYER_LAZARUS] = LifeBar.new(6, 6)
+	instance.characters[PlayerType.PLAYER_EDEN] = LifeBar.new(6, 6) ---@TODO make this random
 	instance.characters[PlayerType.PLAYER_THELOST] = LifeBar.new(0, 0, 1)
-	instance.characters[PlayerType.PLAYER_LAZARUS2] = LifeBar.new(2, 1)
+	instance.characters[PlayerType.PLAYER_LAZARUS2] = LifeBar.new(2, 2)
 	instance.characters[PlayerType.PLAYER_BLACKJUDAS] = LifeBar.new(0, 0, 0, 4)
-	instance.characters[PlayerType.PLAYER_LILITH] = LifeBar.new(2, 1, 0, 4)
-	instance.characters[PlayerType.PLAYER_KEEPER] = LifeBar.new(3, 3)
-	instance.characters[PlayerType.PLAYER_APOLLYON] = LifeBar.new(4, 2)
+	instance.characters[PlayerType.PLAYER_LILITH] = LifeBar.new(2, 2, 0, 4)
+	instance.characters[PlayerType.PLAYER_KEEPER] = LifeBar.new(3, 3) ---@TODO Help please.
+	instance.characters[PlayerType.PLAYER_APOLLYON] = LifeBar.new(4, 4)
 	instance.characters[PlayerType.PLAYER_THEFORGOTTEN] = LifeBar.new(4, 0, 0, 0, 2)
 	instance.characters[PlayerType.PLAYER_THESOUL] = LifeBar.new(0, 0, 2)
-	instance.characters[PlayerType.PLAYER_BETHANY] = LifeBar.new(6, 3)
-	instance.characters[PlayerType.PLAYER_JACOB] = LifeBar.new(6, 3)
-	instance.characters[PlayerType.PLAYER_ESAU] = LifeBar.new(2, 1, 2)
+	instance.characters[PlayerType.PLAYER_BETHANY] = LifeBar.new(6, 6)
+	instance.characters[PlayerType.PLAYER_JACOB] = LifeBar.new(6, 6)
+	instance.characters[PlayerType.PLAYER_ESAU] = LifeBar.new(2, 2, 2)
 
     instance.delirio = LifeBar.new(0, 0, 0, 2, 0, 1)
 
     return instance
 end
 
+---Getter for characters tab elements
 ---@param player PlayerType
 ---@return LifeBar
 function DelirioLife:GetLife(player)
     return self.characters[player]
 end
 
+---Setter for characters tab elements
 ---@param player PlayerType
 ---@param life LifeBar
 function DelirioLife:ChangeLife(player, life)
     self.characters[player] = life
 end
 
+---Getter for delirio's life (his true form)
 ---@return LifeBar
 function DelirioLife:GetDelirioLife()
     return self.delirio
 end
 
+---Setter for delirio's life (his true form)
 ---@param life LifeBar
 function DelirioLife:ChangeDelirioLife(life)
     self.delirio = life
