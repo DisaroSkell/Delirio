@@ -47,12 +47,14 @@ end
 ---@param player EntityPlayer
 ---@return LifeBar
 function LifeBar.newFromPlayer(player)
-    local realSoulCount = player:GetSoulHearts() - player:GetBlackHearts()
+    local realBlackCount = CountBoolTab(BlackHeartMaskToBoolTab(player:GetBlackHearts()))*2
+
+    local realSoulCount = player:GetSoulHearts() - realBlackCount
 
     return LifeBar.new( player:GetHearts(),
                         player:GetMaxHearts(),
                         realSoulCount,
-                        player:GetBlackHearts(),
+                        realBlackCount,
                         player:GetBoneHearts(),
                         player:GetEternalHearts(),
                         player:GetGoldenHearts(),

@@ -15,6 +15,16 @@ function StoreLife(player)
     if player:GetName() == "Delirio" then
         Delirio:ChangeDelirioLife(life)
     else
+        if player:GetPlayerType() == PlayerType.PLAYER_JACOB then
+            -- Store life of Esau
+            Delirio:ChangeLife(player:GetOtherTwin():GetPlayerType(), LifeBar.newFromPlayer(player:GetOtherTwin()))
+        end
+
+        if player:GetPlayerType() == PlayerType.PLAYER_THEFORGOTTEN then
+            -- Store life of The Soul
+            Delirio:ChangeLife(player:GetSubPlayer():GetPlayerType(), LifeBar.newFromPlayer(player:GetSubPlayer()))
+        end
+
         Delirio:ChangeLife(player:GetPlayerType(), life)
     end
 end
@@ -46,6 +56,16 @@ function LoadLife(player, nextPlayerType)
 
     -- Black hearts being counted by as soul hearts, the diff isn't accurate here either.
     player:AddBlackHearts(goalLife:GetHeartCount(HeartType.BLACK) - player:GetBlackHearts())
+
+    if player:GetPlayerType() == PlayerType.PLAYER_JACOB then
+        -- Load life of Esau
+        LoadLife(player:GetOtherTwin(), player:GetOtherTwin():GetPlayerType())
+    end
+
+    if player:GetPlayerType() == PlayerType.PLAYER_THEFORGOTTEN then
+        -- Load life of The Soul
+        LoadLife(player:GetSubPlayer(), player:GetSubPlayer():GetPlayerType())
+    end
 end
 
 ---Converts the int into PlayerType enum
