@@ -1,3 +1,4 @@
+require "script.script-utils"
 require "script.HeartType"
 
 ---@class LifeBar

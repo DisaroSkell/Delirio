@@ -1,5 +1,4 @@
 require "script.LifeBar"
-require "script.script-utils"
 
 ---@class DelirioLife
 ---@field characters table
