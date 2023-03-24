@@ -8,11 +8,15 @@ local mod = delirio
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
 local itemUsed = false
+local cursedByDelirio = false ---@TODO put this to true when item is picked up
 
 -- Does the Delirio initialization (give active item and eternal heart)
 function mod:delirioInit(player)
+    cursedByDelirio = false
+
     if player:GetName() == "Delirio" then
         player:AddCollectible(DelirioCurse)
+        cursedByDelirio = true
         player:AddEternalHearts(1)
     end
 
@@ -69,7 +73,7 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.UseUnchargedCurse)
 
 -- Damages the player if he has the full charged item and clears a room
-function mod:OverchargedCheck(RNG,pos)
+function mod:OverchargedCheck(_, _)
     local player = Isaac.GetPlayer(0)
     local slot = nil
     if player:HasCollectible(DelirioCurse) then
@@ -95,6 +99,21 @@ function mod:OverchargedCheck(RNG,pos)
     end
 end
 mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.OverchargedCheck)
+
+-- Prevents the player from picking up any other active item
+function mod:ActiveItemsCurse(pickup, collider, _)
+	if not collider:ToPlayer() then return end
+
+    if pickup.Variant == PickupVariant.PICKUP_COLLECTIBLE then
+        local item = Isaac.GetItemConfig():GetCollectible(pickup.SubType)
+        local isActive = item.Type == ItemType.ITEM_ACTIVE
+
+        if cursedByDelirio and isActive then
+            return false
+        end
+    end
+end
+mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.ActiveItemsCurse)
 
 --[[
 --whisp implememtation (book of virtues)

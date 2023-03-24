@@ -12,7 +12,6 @@ The character concept is all about his item. It is a 6 charges active item. When
 
 ### Bug fixes:
 
-- KEEPER
 - Black hearts instead of soul hearts and vice versa (doesn't always occur)
 - Handle multiplayer
 
@@ -20,7 +19,6 @@ The character concept is all about his item. It is a 6 charges active item. When
 
 - Put the item behind unlock conditions.
 - Add the properties of the character you currently have in the item. (e. g. if you are Isaac you use the D6 and switch character when you use the item) + passive items please
-- Make it so when you pick the item up with another character you can't switch active item anymore. (Idea: change activable item to Delirio's Curse on pickup)
 - Add the Delirium's Coffee
 
 ### Character updates:
