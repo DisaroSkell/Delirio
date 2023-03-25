@@ -2,7 +2,7 @@
 
 ## Mod Description
 
-Delirio Mod adds a brand new character : Delirio.
+Delirio Mod adds a new character : Delirio.
 
 It comes with its own item : Delirio's Curse.
 
@@ -18,7 +18,8 @@ The character concept is all about his item. It is a 6 charges active item. When
 ### Item updates:
 
 - Put the item behind unlock conditions.
-- Add the properties of the character you currently have in the item. (e. g. if you are Isaac you use the D6 and switch character when you use the item)
+- Add the properties of the character you currently have in the item. (e. g. if you are Isaac you use the D6 and switch character when you use the item) + passive items please
+- Add the Delirium's Coffee
 
 ### Character updates:
 
