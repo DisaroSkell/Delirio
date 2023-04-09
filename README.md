@@ -19,10 +19,10 @@ The character concept is all about his item. It is a 6 charges active item. When
 
 - Put the item behind unlock conditions.
 - Add the Delirium's Coffee
+- Randomize Eden when using item
 
 ### Character updates:
 
-- Randomize Eden
 - Put the character behind unlock conditions.
 - Make the tainted version.
 
