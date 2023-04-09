@@ -1,0 +1,5 @@
+<ItemPools>
+    <Pool Name="angel">
+		<Item Name="Delirio's Curse" Weight="0.6" DecreaseBy="0.6" RemoveOn="0.06"/>
+    </Pool>
+</ItemPools>
