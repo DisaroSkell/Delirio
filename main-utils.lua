@@ -131,3 +131,43 @@ function ChosePlayerFromInt(n)
 
     return result
 end
+
+---Remove character-specific items from the current player
+---(e. g. remove Dead Bird if the PlayerType is Eve)
+---@param player EntityPlayer
+function RemoveCharacterItem(player)
+    if player:GetPlayerType() == PlayerType.PLAYER_CAIN then
+        player:RemoveCollectible(CollectibleType.COLLECTIBLE_LUCKY_FOOT)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_EVE then
+        player:RemoveCollectible(CollectibleType.COLLECTIBLE_DEAD_BIRD)
+        player:RemoveCollectible(CollectibleType.COLLECTIBLE_WHORE_OF_BABYLON)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_SAMSON then
+        player:RemoveCollectible(CollectibleType.COLLECTIBLE_BLOODY_LUST)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_LAZARUS then
+        player:RemoveCollectible(CollectibleType.COLLECTIBLE_ANEMIC)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_LILITH then
+        player:RemoveCollectible(CollectibleType.COLLECTIBLE_CAMBION_CONCEPTION)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_BETHANY then
+        player:RemoveCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES)
+    end
+end
+
+---Add character-specific items for the current player
+---(e. g. add Dead Bird if the PlayerType is Eve)
+---@param player EntityPlayer
+function AddCharacterItem(player)
+    if player:GetPlayerType() == PlayerType.PLAYER_CAIN then
+        player:AddCollectible(CollectibleType.COLLECTIBLE_LUCKY_FOOT)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_EVE then
+        player:AddCollectible(CollectibleType.COLLECTIBLE_DEAD_BIRD)
+        player:AddCollectible(CollectibleType.COLLECTIBLE_WHORE_OF_BABYLON)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_SAMSON then
+        player:AddCollectible(CollectibleType.COLLECTIBLE_BLOODY_LUST)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_LAZARUS then
+        player:AddCollectible(CollectibleType.COLLECTIBLE_ANEMIC)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_LILITH then
+        player:AddCollectible(CollectibleType.COLLECTIBLE_CAMBION_CONCEPTION)
+    elseif player:GetPlayerType() == PlayerType.PLAYER_BETHANY then
+        player:AddCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES)
+    end
+end

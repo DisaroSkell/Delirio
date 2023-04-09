@@ -30,10 +30,11 @@ function mod:UseDelirioCurse(delirioCurse, rng, player)
     local nextPlayerType = ChosePlayerFromInt(num)
 
     StoreLife(player)
+    RemoveCharacterItem(player)
 
     player:ChangePlayerType(nextPlayerType)
     LoadLife(player, nextPlayerType)
-    -- changeActive()
+    AddCharacterItem(player)
 
     itemUsed = true
 end
