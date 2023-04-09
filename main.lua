@@ -8,7 +8,7 @@ local mod = delirio
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
 local itemUsed = false
-local cursedByDelirio = false ---@TODO put this to true when item is picked up
+local cursedByDelirio = false
 
 -- Does the Delirio initialization (give active item and eternal heart)
 function mod:delirioInit(player)
@@ -102,7 +102,9 @@ mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.OverchargedCheck)
 
 -- Prevents the player from picking up any other active item
 function mod:ActiveItemsCurse(pickup, collider, _)
-	if not collider:ToPlayer() then return end
+	if not collider:ToPlayer() then
+        return
+    end
 
     if pickup.Variant == PickupVariant.PICKUP_COLLECTIBLE then
         local item = Isaac.GetItemConfig():GetCollectible(pickup.SubType)
@@ -111,6 +113,8 @@ function mod:ActiveItemsCurse(pickup, collider, _)
         if cursedByDelirio and isActive then
             return false
         end
+
+        cursedByDelirio = cursedByDelirio or DelirioCurse == pickup.SubType
     end
 end
 mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.ActiveItemsCurse)
