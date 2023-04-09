@@ -23,6 +23,7 @@ The character concept is all about his item. It is a 6 charges active item. When
 
 ### Character updates:
 
+- Randomize Eden
 - Put the character behind unlock conditions.
 - Make the tainted version.
 
