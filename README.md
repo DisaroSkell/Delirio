@@ -14,12 +14,13 @@ The character concept is all about his item. It is a 6 charges active item. When
 
 - Black hearts instead of soul hearts and vice versa (doesn't always occur)
 - Handle multiplayer
+- Randomize Eden when using item.
+- Handle Bethany's soul charges when switching.
 
 ### Item updates:
 
 - Put the item behind unlock conditions.
 - Add the Delirium's Coffee
-- Randomize Eden when using item
 
 ### Character updates:
 
