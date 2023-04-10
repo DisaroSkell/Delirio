@@ -7,6 +7,7 @@ local mod = delirio
 -- Saves the item in a variable
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
+local delirioLife = DelirioLife:new()
 local itemUsed = false
 local cursedByDelirio = false
 
@@ -20,7 +21,7 @@ function mod:delirioInit(player)
         player:AddEternalHearts(1)
     end
 
-    LifeInit()
+    delirioLife = DelirioLife:new()
 end
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.delirioInit)
 
@@ -29,11 +30,11 @@ function mod:UseDelirioCurse(delirioCurse, rng, player)
 	local num = rng:RandomInt(17) -- Character number [0; 17[
     local nextPlayerType = ChosePlayerFromInt(num)
 
-    StoreLife(player)
+    delirioLife:StoreLife(player)
     RemoveCharacterItem(player)
 
     player:ChangePlayerType(nextPlayerType)
-    LoadLife(player, nextPlayerType)
+    delirioLife:LoadLife(player, nextPlayerType)
     AddCharacterItem(player)
 
     itemUsed = true

@@ -68,6 +68,69 @@ function DelirioLife:ChangeDelirioLife(life)
     self.delirio = life
 end
 
+---Stores current life of the player in parameter in self
+---@param player EntityPlayer
+DelirioLife.StoreLife = function (self, player)
+    local life = LifeBar.newFromPlayer(player)
+
+    if player:GetName() == "Delirio" then
+        self:ChangeDelirioLife(life)
+    else
+        local currentPlayerType = player:GetPlayerType()
+
+        if currentPlayerType == PlayerType.PLAYER_JACOB then
+            -- Store life of Esau
+            self:ChangeLife(player:GetOtherTwin():GetPlayerType(), LifeBar.newFromPlayer(player:GetOtherTwin()))
+        end
+
+        if currentPlayerType == PlayerType.PLAYER_THEFORGOTTEN then
+            -- Store life of The Soul
+            self:ChangeLife(player:GetSubPlayer():GetPlayerType(), LifeBar.newFromPlayer(player:GetSubPlayer()))
+        end
+
+        self:ChangeLife(currentPlayerType, life)
+    end
+end
+
+---Change life of the player in parameter to match the life stored in self
+---@param player EntityPlayer
+---@param nextPlayerType PlayerType
+DelirioLife.LoadLife = function (self, player, nextPlayerType)
+    local currentLife = LifeBar.newFromPlayer(player)
+    local goalLife = {}
+
+    if player:GetName() == "Delirio" then
+        goalLife = self:GetDelirioLife()
+    else
+        goalLife = self:GetLife(nextPlayerType)
+    end
+
+    local diff = goalLife:Diff(currentLife)
+
+    player:AddBrokenHearts(diff:GetHeartCount(HeartType.BROKEN))
+    player:AddMaxHearts(diff:GetHeartCount(HeartType.CONTAINER))
+    player:AddBoneHearts(diff:GetHeartCount(HeartType.BONE))
+    player:AddSoulHearts(diff:GetHeartCount(HeartType.SOUL))
+    player:AddEternalHearts(diff:GetHeartCount(HeartType.ETERNAL))
+    player:AddGoldenHearts(diff:GetHeartCount(HeartType.GOLDEN))
+
+    -- Because containers moved, the diff isn't accurate here.
+    player:AddHearts(goalLife:GetHeartCount(HeartType.RED) - player:GetHearts())
+
+    -- Black hearts being counted by as soul hearts, the diff isn't accurate here either.
+    player:AddBlackHearts(goalLife:GetHeartCount(HeartType.BLACK) - CountBoolTab(BlackHeartMaskToBoolTab(player:GetBlackHearts()))*2)
+
+    if player:GetPlayerType() == PlayerType.PLAYER_JACOB then
+        -- Load life of Esau
+        self:LoadLife(player:GetOtherTwin(), player:GetOtherTwin():GetPlayerType())
+    end
+
+    if player:GetPlayerType() == PlayerType.PLAYER_THEFORGOTTEN then
+        -- Load life of The Soul
+        self:LoadLife(player:GetSubPlayer(), player:GetSubPlayer():GetPlayerType())
+    end
+end
+
 ---Function to display DelirioLife (debug purposes)
 ---@return string
 function DelirioLife:__tostring()
