@@ -7,11 +7,13 @@ local mod = delirio
 -- Saves the item in a variable
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
+-- Variables used in main functions
 local delirioLife = DelirioLife:new()
 local itemUsed = false
 local cursedByDelirio = false
 
--- Does the Delirio initialization (give active item and eternal heart)
+---Does the Delirio initialization (give active item and eternal heart)
+---@param player EntityPlayer
 function mod:delirioInit(player)
     cursedByDelirio = false
 
@@ -25,7 +27,10 @@ function mod:delirioInit(player)
 end
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.delirioInit)
 
--- Activates the item "Delirio's Curse"
+---Activates the item "Delirio's Curse"
+---@param delirioCurse CollectibleType
+---@param rng RNG
+---@param player EntityPlayer
 function mod:UseDelirioCurse(delirioCurse, rng, player)
 	local num = rng:RandomInt(17) -- Character number [0; 17[
     local nextPlayerType = ChosePlayerFromInt(num)
@@ -41,8 +46,8 @@ function mod:UseDelirioCurse(delirioCurse, rng, player)
 end
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseDelirioCurse, DelirioCurse)
 
--- Calls UseDelirioCurse function
--- Allows the player to use the item while partially charged (minimum 2 charges)
+---Allows the player to use the item while partially charged (minimum 2 charges)
+---Calls UseDelirioCurse function
 function mod:UseUnchargedCurse()
     local player = Isaac.GetPlayer(0)
     local slot = nil
@@ -74,7 +79,7 @@ function mod:UseUnchargedCurse()
 end
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.UseUnchargedCurse)
 
--- Damages the player if he has the full charged item and clears a room
+---Damages the player if he has the full charged item and clears a room
 function mod:OverchargedCheck(_, _)
     local player = Isaac.GetPlayer(0)
     local slot = nil
@@ -102,7 +107,10 @@ function mod:OverchargedCheck(_, _)
 end
 mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.OverchargedCheck)
 
--- Prevents the player from picking up any other active item
+---Prevents the player from picking up any other active item
+---@param pickup EntityPickup
+---@param collider table [Entity]
+---@return boolean? (true => ignore collision; false => collide but not execute internal code; nil => continue as expected)
 function mod:ActiveItemsCurse(pickup, collider, _)
 	if not collider:ToPlayer() then
         return
