@@ -14,7 +14,7 @@ local cursedByDelirio = false
 
 ---Does the Delirio initialization (give active item and eternal heart)
 ---@param player EntityPlayer
-function mod:delirioInit(player)
+function mod:DelirioInit(player)
     cursedByDelirio = false
 
     if player:GetName() == "Delirio" then
@@ -25,7 +25,7 @@ function mod:delirioInit(player)
 
     delirioLife = DelirioLife:new()
 end
-mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.delirioInit)
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.DelirioInit)
 
 ---Activates the item "Delirio's Curse"
 ---@param delirioCurse CollectibleType
