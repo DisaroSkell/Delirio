@@ -7,6 +7,7 @@
 - Handle multiplayer (will fix problem linked to a wrong callback of lifeinit)
 - Randomize Eden when using item.
 - Handle Bethany's soul charges when switching.
+- If Esau picks up and uses the item, witchcraft happens.
 
 ## Item updates:
 
