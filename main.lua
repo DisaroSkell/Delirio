@@ -8,22 +8,32 @@ local mod = delirio
 local DelirioCurse = Isaac.GetItemIdByName("Delirio's Curse")
 
 -- Variables used in main functions
-local delirioLife = DelirioLife:new()
 local itemUsed = false
-local cursedByDelirio = false
+
+---@TODO
+-- Those should be tables with one per player
+-- Here have a DelirioLife per DelirioClicker user
+local delirioLife = { DelirioLife:new(), DelirioLife:new(), DelirioLife:new(), DelirioLife:new() }
+-- Here have a curse per character
+local cursedByDelirio = { false, false, false, false }
+
+---@TODO Here restore DelirioLife if isContinued
+---Initialize all variables for the game start
+---@param isContinued boolean
+function mod:GameInit(isContinued)
+    delirioLife = { DelirioLife:new(), DelirioLife:new(), DelirioLife:new(), DelirioLife:new() }
+    local player = Isaac.GetPlayer(0)
+    cursedByDelirio[1] = player:GetName() == "Delirio"
+end
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.GameInit)
 
 ---Does the Delirio initialization (give active item and eternal heart)
 ---@param player EntityPlayer
 function mod:DelirioInit(player)
-    cursedByDelirio = false
-
     if player:GetName() == "Delirio" then
         player:AddCollectible(DelirioCurse)
-        cursedByDelirio = true
         player:AddEternalHearts(1)
     end
-
-    delirioLife = DelirioLife:new()
 end
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT , mod.DelirioInit)
 
@@ -35,11 +45,11 @@ function mod:UseDelirioCurse(delirioCurse, rng, player)
 	local num = rng:RandomInt(17) -- Character number [0; 17[
     local nextPlayerType = ChosePlayerFromInt(num)
 
-    delirioLife:StoreLife(player)
+    delirioLife[1]:StoreLife(player)
     RemoveCharacterItem(player)
 
     player:ChangePlayerType(nextPlayerType)
-    delirioLife:LoadLife(player, nextPlayerType)
+    delirioLife[1]:LoadLife(player, nextPlayerType)
     AddCharacterItem(player)
 
     itemUsed = true
@@ -120,11 +130,11 @@ function mod:ActiveItemsCurse(pickup, collider, _)
         local item = Isaac.GetItemConfig():GetCollectible(pickup.SubType)
         local isActive = item.Type == ItemType.ITEM_ACTIVE
 
-        if cursedByDelirio and isActive then
+        if cursedByDelirio[1] and isActive then
             return false
         end
 
-        cursedByDelirio = cursedByDelirio or DelirioCurse == pickup.SubType
+        cursedByDelirio[1] = cursedByDelirio[1] or DelirioCurse == pickup.SubType
     end
 end
 mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.ActiveItemsCurse)
