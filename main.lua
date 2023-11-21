@@ -113,19 +113,22 @@ mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.OverchargedCheck)
 ---@return boolean? (true => ignore collision; false => collide but not execute internal code; nil => continue as expected)
 function mod:ActiveItemsCurse(pickup, collider, _)
 	if not collider:ToPlayer() then
+        -- We are only interested by collision where a player is involved
         return
     end
 
-    if pickup.Variant == PickupVariant.PICKUP_COLLECTIBLE then
+    if (pickup.Variant == PickupVariant.PICKUP_COLLECTIBLE) and not (pickup.SubType == 0) then
         local item = Isaac.GetItemConfig():GetCollectible(pickup.SubType)
         local isActive = item.Type == ItemType.ITEM_ACTIVE
 
         if cursedByDelirio and isActive then
+            -- Here we want the character to collision with the pedestal but not pick the item
             return false
         end
 
         cursedByDelirio = cursedByDelirio or DelirioCurse == pickup.SubType
     end
+    -- We are not interested by the collision if it's not with a non empty item pedestal
 end
 mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.ActiveItemsCurse)
 
